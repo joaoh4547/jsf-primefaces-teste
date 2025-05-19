@@ -1,0 +1,30 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:param name="ocultarMenu" value="true" />
+	<ui:param name="pageTitle" value="Teste" />
+	<ui:define name="content">
+		<div class="flex flex-column gap-3">
+			<div class="flex flex-column">
+				<div
+					class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">1</div>
+				<div
+					class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">2</div>
+				<div
+					class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">3</div>
+			</div>
+			<h:form>
+				<div class="flex flex-column">
+					<div class="field">
+						<p:outputLabel for="username1" styleClass="flex text-700">Username</p:outputLabel>
+						<p:inputText id="username1" styleClass="flex w-full " />
+					</div>
+				</div>
+				<p:commandButton value="Confirmar"></p:commandButton>
+			</h:form>
+		</div>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:pe="http://primefaces.org/ui/extensions">
+<h:head>
+    <title>Minha Aplicação</title>
+</h:head>
+<h:body>
+    <pe:layout fullPage="true" stateCookie="true" widgetVar="layoutWidget">
+        <pe:layoutPane position="north" size="100" closable="true" resizable="true" collapsible="true">
+            <ui:insert name="header">
+                <h:outputText value="Cabeçalho Padrão" />
+            </ui:insert>
+        </pe:layoutPane>
+        <pe:layoutPane position="west" size="200" closable="true" resizable="true" collapsible="true">
+            <ui:insert name="menu">
+                <h:outputText value="Menu Padrão" />
+            </ui:insert>
+        </pe:layoutPane>
+        <pe:layoutPane position="center">
+            <ui:insert name="content">
+                <h:outputText value="Conteúdo Padrão" />
+            </ui:insert>
+        </pe:layoutPane>
+        <pe:layoutPane position="south" size="50" closable="true" resizable="true" collapsible="true">
+            <ui:insert name="footer">
+                <h:outputText value="Rodapé Padrão" />
+            </ui:insert>
+        </pe:layoutPane>
+    </pe:layout>
+</h:body>
+</html>

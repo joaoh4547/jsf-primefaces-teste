@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Minha Aplicação</title>
+
+	<h:outputStylesheet library="webjars"
+		name="primeflex/3.3.1/primeflex.min.css" />
+
+	<h:outputStylesheet name="css/style.css" />
+
+</h:head>
+<h:body>
+	<pe:layout fullPage="true" stateCookie="true">
+
+		<!-- utilizar  <ui:param name="ocultarMenu" value="true" /> para ocutar menu da pagina  -->
+		<pe:layoutPane position="west" size="250" closable="true"
+			slidable="true" resizable="true"
+			initClosed="#{ocultarMenu == null ? false : ocultarMenu}">
+		</pe:layoutPane>
+		<pe:layoutPane position="center" closable="false" slidable="false"
+			resizable="false">
+			<div class="p-2">
+				<ui:insert name="content"></ui:insert>
+			</div>
+		</pe:layoutPane>
+
+		<pe:layoutPane position="north" size="80" closable="false" rendered="#{pageTitle != null}"
+			slidable="false" resizable="false">
+			<h:panelGroup rendered="#{pageTitle != null}">
+				<div class="flex h-full	p-1 align-items-center justify-content-between">
+					<p:outputLabel value="#{pageTitle}" />
+				</div>
+			</h:panelGroup>
+
+		</pe:layoutPane>
+
+		<!-- Painel inferior (fixo) -->
+		<pe:layoutPane position="south" size="80" closable="false"
+			slidable="false" resizable="false">
+			<!-- Rodapé -->
+		</pe:layoutPane>
+
+	</pe:layout>
+</h:body>
+</html>
