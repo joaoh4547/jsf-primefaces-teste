@@ -5,8 +5,10 @@
 	xmlns:pe="http://primefaces.org/ui/extensions"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Minha Aplicação</title>
-
+	<title>#{appInfo.appName} <ui:fragment
+			rendered="#{not empty pageTitle}"> | #{pageTitle}</ui:fragment>
+	</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<h:outputStylesheet library="webjars"
 		name="primeflex/3.3.1/primeflex.min.css" />
 
@@ -14,7 +16,7 @@
 
 </h:head>
 <h:body>
-	<pe:layout fullPage="true" stateCookie="true">
+	<pe:layout fullPage="true" stateCookie="false">
 
 		<!-- utilizar  <ui:param name="ocultarMenu" value="true" /> para ocutar menu da pagina  -->
 		<pe:layoutPane position="west" size="250" closable="true"
@@ -28,10 +30,11 @@
 			</div>
 		</pe:layoutPane>
 
-		<pe:layoutPane position="north" size="80" closable="false" rendered="#{pageTitle != null}"
-			slidable="false" resizable="false">
+		<pe:layoutPane position="north" size="45" closable="false"
+			rendered="#{pageTitle != null}" slidable="false" resizable="false">
 			<h:panelGroup rendered="#{pageTitle != null}">
-				<div class="flex h-full	p-1 align-items-center justify-content-between">
+				<div
+					class="flex h-full	p-1 align-items-center justify-content-end mr-5">
 					<p:outputLabel value="#{pageTitle}" />
 				</div>
 			</h:panelGroup>
@@ -39,17 +42,20 @@
 		</pe:layoutPane>
 
 		<!-- Painel inferior (fixo) -->
-		<pe:layoutPane position="south" size="80" closable="false"
-			slidable="false" resizable="false">
+		<pe:layoutPane position="south" size="34" closable="false"
+			slidable="false" resizable="false"
+			styleClassContent="bg-black-alpha-20">
 			<!-- Rodapé -->
+			<p:outputLabel value="© #{appInfo.appName} - #{appInfo.currentYear}"
+				styleClass="flex w-full h-full justify-content-center	align-items-center text-700" />
 		</pe:layoutPane>
 
 	</pe:layout>
 	<h:form>
-    <!-- Monitor de inatividade -->
+		<!-- Monitor de inatividade 
     <p:idleMonitor timeout="60" onidle="PF('idleDialog').show()" />
 
-    <!-- Diálogo de aviso -->
+    Diálogo de aviso
     <p:confirmDialog id="idleDialog" widgetVar="idleDialog"
                      header="Sessão Inativa"
                      message="Você está inativo há 10 minutos. Deseja continuar?"
@@ -57,6 +63,8 @@
         <p:commandButton value="Sim" onclick="PF('idleDialog').hide()" />
       
     </p:confirmDialog>
-</h:form>
+    
+    -->
+	</h:form>
 </h:body>
 </html>
