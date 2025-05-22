@@ -1,4 +1,4 @@
-package com.teste.testejsf;
+package com.teste.testejsfview;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -56,6 +56,7 @@ import software.xdev.chartjs.model.options.scales.RadialLinearScale;
 import software.xdev.chartjs.model.options.scales.Scales;
 import software.xdev.chartjs.model.options.ticks.CategoryTicks;
 import software.xdev.chartjs.model.options.ticks.RadialLinearTicks;
+
 
 @Named
 @RequestScoped

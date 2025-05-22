@@ -1,7 +1,4 @@
-package com.teste.testejsf;
-
-
-import java.util.List;
+package com.teste.testejsfview;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;

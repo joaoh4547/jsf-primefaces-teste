@@ -45,5 +45,18 @@
 		</pe:layoutPane>
 
 	</pe:layout>
+	<h:form>
+    <!-- Monitor de inatividade -->
+    <p:idleMonitor timeout="60" onidle="PF('idleDialog').show()" />
+
+    <!-- Diálogo de aviso -->
+    <p:confirmDialog id="idleDialog" widgetVar="idleDialog"
+                     header="Sessão Inativa"
+                     message="Você está inativo há 10 minutos. Deseja continuar?"
+                     severity="alert">
+        <p:commandButton value="Sim" onclick="PF('idleDialog').hide()" />
+      
+    </p:confirmDialog>
+</h:form>
 </h:body>
 </html>
