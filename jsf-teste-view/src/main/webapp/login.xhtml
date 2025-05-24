@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:pe="http://primefaces.org/ui/extensions"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
@@ -14,93 +12,117 @@
 
 	<h:outputStylesheet name="css/style.css" />
 </h:head>
+
 <h:body>
-	<div
-		class="flex h-screen w-screen bg-primary-100 align-items-center justify-content-center">
-		<p:card styleClass="w-25rem h-25rem">
-			<f:facet name="title">
-				<div class="flex align-items-center justify-content-center">
-					<p:outputLabel value="Autenticar" styleClass="text-800 font-bold" />
-				</div>
-				<p:divider />
-			</f:facet>
-			<h:form>
+
+	<!-- Formulário de Login -->
+	<h:form id="loginForm">
+		<div
+			class="flex h-screen w-screen bg-primary-100 align-items-center justify-content-center">
+			<p:card>
+				<f:facet name="title">
+					<div class="flex align-items-center justify-content-center">
+						<p:outputLabel value="Autenticar" styleClass="text-800 font-bold" />
+					</div>
+					<p:divider />
+				</f:facet>
 				<div class="flex flex-column gap-4">
 					<div class="flex w-full flex-column gap-2">
-						<p:outputLabel for="username">Usuario</p:outputLabel>
-						<p:inputText id="username" value="#{loginView.data.user}">
-							<p:ajax event="keyup" />
-						</p:inputText>
+						<p:outputLabel for="username" value="#{msg['user.label']}" />
+						<p:inputText id="username" value="#{loginView.username}"
+							required="true" />
 					</div>
 					<div class="flex w-full flex-column gap-2">
-						<p:outputLabel for="password">Senha</p:outputLabel>
-						<p:password id="password" />
+						<p:outputLabel for="password" value="Senha" />
+						<p:password id="password" value="#{loginView.password}"
+							required="true" />
 					</div>
 				</div>
+
 				<p:divider />
 				<div class="flex justify-content-end align-items-end gap-7">
+
 					<p:commandLink value="Esqueceu a Senha?"
 						onclick="PF('recoverPasswordDialog').show()" />
-					<p:commandButton value="Acessar" />
-
-					<p:dialog header="Recuperar Senha" id="recoverPasswordDialog"
-						width="450" height="300" widgetVar="recoverPasswordDialog"
-						showEffect="fade" modal="true">
-
-						<p:outputPanel id="recoverPanel" layout="block">
-							<!-- Se NÃO enviou ainda -->
-							<p:outputPanel rendered="#{!loginView.recoverCodeSended}"
-								layout="block">
-								<div class="flex flex-column gap-4">
-									<div class="flex w-full flex-column gap-2">
-										<p:outputLabel for="recoverUser" value="Usuário" />
-										<p:inputText id="recoverUser" required="true"
-											value="#{loginView.recoverUser}" />
-									</div>
-									<p:commandButton value="Enviar Código de Recuperação"
-										action="#{loginView.sendCode}" update="recoverPanel"
-										process="@this recoverUser" />
-								</div>
-							</p:outputPanel>
-
-							<!-- Se já enviou -->
-							<p:outputPanel rendered="#{loginView.recoverCodeSended}"
-								layout="block">
-								<div class="flex flex-column">
-									<div class="flex flex-column gap-4 mb-2">
-										<div class="flex w-full flex-column gap-2">
-											<p:outputLabel for="code" value="Usuário" />
-											<p:inputText id="code" required="true"
-												value="#{loginView.recoverUser}" />
-										</div>
-										<div class="flex w-full flex-column gap-2">
-											<p:outputLabel for="newPassword" value="Nova Senha" />
-											<p:password id="newPassword" required="true"
-												value="#{loginView.recoverUser}" />
-										</div>
-										<div class="flex w-full flex-column gap-2">
-											<p:outputLabel for="repeatNewPassword" value="Repita a Senha" />
-											<p:password id="repeatNewPassword" required="true"
-												value="#{loginView.recoverUser}" />
-										</div>
-
-
-									</div>
-									<div class="flex w-full justify-content-end gap-4">
-										<p:commandButton value="Voltar"
-											action="#{loginView.resetRecover}"
-											styleClass="ui-button-danger" update="recoverPanel" immediate="true" />
-										<p:commandButton value="Confirmar" icon="pi pi-check"
-											 update="recoverPanel" />
-									</div>
-								</div>
-							</p:outputPanel>
-
-						</p:outputPanel>
-					</p:dialog>
+					<p:commandButton value="Entrar" action="#{loginView.login}"
+						update="@form" />
 				</div>
-			</h:form>
-		</p:card>
-	</div>
+			</p:card>
+		</div>
+	</h:form>
+
+
+	<!-- Formulário da Recuperação de Senha -->
+	<h:form id="recoverForm">
+		<p:dialog header="Recuperar Senha" widgetVar="recoverPasswordDialog"
+			modal="true" resizable="false" width="450" onHide="clearRecover()" closeOnEscape="true">
+
+			<!-- RemoteCommand para limpar ao fechar -->
+			<p:remoteCommand name="clearRecover"
+				action="#{loginView.resetRecover}" process="@this"
+				update="recoverPanel" />
+
+			<p:outputPanel id="recoverPanel">
+
+
+				<!-- Etapa 1: enviar código -->
+				<p:outputPanel rendered="#{!loginView.recoverCodeSended}">
+					<div class="flex flex-column gap-4">
+						<div class="flex w-full flex-column gap-2">
+
+							<p:outputLabel for="recoverUser" value="#{msg['user.label']}" />
+							<p:inputText id="recoverUser" value="#{loginView.recoverUser}">
+								<p:ajax event="blur" update="@this @next" />
+
+							</p:inputText>
+							<p:message for="@previous" />
+						</div>
+						<p:commandButton value="Enviar Código"
+							action="#{loginView.sendCode}" update="recoverPanel"
+							process="@this recoverUser" />
+					</div>
+				</p:outputPanel>
+
+				<!-- Etapa 2: redefinir senha -->
+				<p:outputPanel rendered="#{loginView.recoverCodeSended}">
+					<div class="flex flex-column">
+						<div class="flex flex-column gap-4 mb-2">
+							<div class="flex w-full flex-column gap-2">
+								<p:outputLabel value="Usuário" />
+								<p:inputText value="#{loginView.recoverUser}" disabled="true" />
+							</div>
+							<div class="flex w-full flex-column gap-2">
+								<p:outputLabel for="code" value="Código de Verificação" />
+								<p:inputText id="code" value="#{loginView.code}" required="true" />
+								<p:message for="@previous" />
+							</div>
+							<div class="flex w-full flex-column gap-2">
+								<p:outputLabel for="newPassword" value="Nova Senha" />
+								<p:password id="newPassword" value="#{loginView.newPassword}"
+									required="true" />
+								<p:message for="@previous" />
+							</div>
+							<div class="flex w-full flex-column gap-2">
+								<p:outputLabel for="repeatNewPassword" value="Repita a Senha" />
+								<p:password id="repeatNewPassword"
+									value="#{loginView.repeatNewPassword}" required="true" />
+								<p:message for="@previous" />
+							</div>
+						</div>
+						<p:divider />
+						<div class="flex w-full justify-content-end gap-4">
+							<p:commandButton value="Voltar"
+								action="#{loginView.resetRecover}" update="recoverPanel"
+								immediate="true" styleClass="ui-button-danger" />
+
+							<p:commandButton value="Confirmar"
+								action="#{loginView.confirmRecover}" update="recoverPanel" />
+						</div>
+					</div>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:dialog>
+	</h:form>
+
 </h:body>
 </html>

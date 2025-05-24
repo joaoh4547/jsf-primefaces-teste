@@ -21,22 +21,19 @@ public class SessionFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 
+		String path = req.getRequestURI().substring(req.getContextPath().length());
 
-        String path = req.getRequestURI().substring(req.getContextPath().length());
+		// Páginas públicas (ajuste conforme necessário)
+		boolean paginaPublica = path.startsWith("/login.xhtml") || path.contains("javax.faces.resource");
 
-        // Páginas públicas (ajuste conforme necessário)
-        boolean paginaPublica = path.startsWith("/index.xhtml") || 
-                                path.startsWith("/login.xhtml") ||
-                                path.startsWith("/erroSessao.xhtml") ||
-                                path.contains("javax.faces.resource"); // recursos JSF (CSS, JS, imagens)
+		HttpSession session = req.getSession(false);
 
-        HttpSession session = req.getSession(false);
-
-        if (paginaPublica || (session != null)) {
-            chain.doFilter(request, response);
-        } else {
-            res.sendRedirect(req.getContextPath() + "/login.xhtml");
-        }
+		if (paginaPublica || (session != null)) {
+			chain.doFilter(request, response);
+		} else {
+			req.getSession();
+			res.sendRedirect(req.getContextPath() + "/login.xhtml");
+		}
 	}
 
 }
