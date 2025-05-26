@@ -11,7 +11,7 @@
 			<supported-locale>pt_BR</supported-locale>
 		</locale-config>
 		<resource-bundle>
-			<base-name>messages</base-name>
+			<base-name>com.teste.testejsf.app.ApplicationResourceBundle</base-name>
 			<var>msg</var>
 		</resource-bundle>
 	</application>

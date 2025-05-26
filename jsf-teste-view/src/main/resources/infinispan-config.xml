@@ -1,0 +1,12 @@
+<infinispan xmlns="urn:infinispan:config:13.0">
+    <cache-container name="hibernate" default-cache="local-query">
+        <local-cache name="local-query">
+            <memory max-count="10000"/>
+        </local-cache>
+        <local-cache name="local-timestamps"/>
+        <local-cache name="local-entity">
+            <memory max-count="10000"/>
+            <expiration max-idle="600000"/>
+        </local-cache>
+    </cache-container>
+</infinispan>

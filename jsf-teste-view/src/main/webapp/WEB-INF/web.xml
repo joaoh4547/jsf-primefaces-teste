@@ -16,6 +16,8 @@
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 
+
+
 	<welcome-file-list>
 		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
@@ -35,6 +37,16 @@
 		<param-value>client</param-value>
 	</context-param>
 
+	<context-param>
+		<param-name>jakarta.faces.SECURITY_CSRF_PROTECTION</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>primefaces.CSP</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	
 	<session-config>
 		<session-timeout>60</session-timeout>
 	</session-config>
@@ -42,8 +54,5 @@
 	<welcome-file-list>
 		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
-	<context-param>
-		<param-name>primefaces.CSP</param-name>
-		<param-value>false</param-value>
-	</context-param>
+
 </web-app>

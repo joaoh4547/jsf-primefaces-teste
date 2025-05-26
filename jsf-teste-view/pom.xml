@@ -14,18 +14,14 @@
 		<primefaces.version>15.0.4</primefaces.version>
 		<primeflex.version>3.3.1</primeflex.version>
 		<xdev.version>1.4.1</xdev.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
 	<dependencies>
 
-		<!-- Jakarta -->
-
-		<dependency>
-			<groupId>jakarta.platform</groupId>
-			<artifactId>jakarta.jakartaee-api</artifactId>
-			<version>${jakarta.version}</version>
-			<scope>provided</scope>
-		</dependency>
 
 		<!-- PrimeFaces -->
 		<dependency>
@@ -33,6 +29,11 @@
 			<artifactId>primefaces</artifactId>
 			<version>${primefaces.version}</version>
 			<classifier>jakarta</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.omnifaces</groupId>
+			<artifactId>omnifaces</artifactId>
+			<version>4.5.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.primefaces.extensions</groupId>
@@ -50,10 +51,35 @@
 			<artifactId>primeflex</artifactId>
 			<version>${primeflex.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.teste</groupId>
+			<artifactId>jsf-teste-m</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
 	</dependencies>
-	
+
+	<profiles>
+		<profile>
+			<id>clienteA</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<app.cliente>clienteA</app.cliente>
+			</properties>
+		</profile>
+	</profiles>
+
 	<build>
 		<finalName>jsf-teste-view</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
 		<plugins>
 			<!-- Plugin WAR -->
 			<plugin>
@@ -61,6 +87,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.3.2</version>
 			</plugin>
+
 		</plugins>
 	</build>
 </project>

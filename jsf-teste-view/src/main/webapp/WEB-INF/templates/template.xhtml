@@ -11,13 +11,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<h:outputStylesheet library="webjars"
 		name="primeflex/3.3.1/primeflex.min.css" />
+	
 
 	<h:outputStylesheet name="css/style.css" />
 
 </h:head>
 <h:body>
-	<pe:layout fullPage="true" stateCookie="false">
-
+	<pe:layout  fullPage="true" stateCookie="false" maskPanesEarly="true">
 		<!-- utilizar  <ui:param name="ocultarMenu" value="true" /> para ocutar menu da pagina  -->
 		<pe:layoutPane position="west" size="250" closable="true"
 			slidable="true" resizable="true"
@@ -30,21 +30,25 @@
 			</div>
 		</pe:layoutPane>
 
-		<pe:layoutPane position="north" size="45" closable="false"
-			rendered="#{pageTitle != null}" slidable="false" resizable="false">
-			<h:panelGroup rendered="#{pageTitle != null}">
-				<div
-					class="flex h-full	p-1 align-items-center justify-content-end mr-5">
-					<p:outputLabel value="#{pageTitle}" />
-				</div>
-			</h:panelGroup>
+		<pe:layoutPane position="north" size="45" closable="false" 
+			slidable="false" resizable="false">
+			<div
+				class="w-full flex justify-content-between align-items-center px-2 h-full">
+				<p:outputLabel value="#{accessControl.currentUser.nome}"
+					styleClass="text-gray-700" />
+				<h:panelGroup rendered="#{pageTitle != null}">
+					<div
+						class="flex h-full	p-1 align-items-center justify-content-end mr-5">
+						<p:outputLabel value="#{pageTitle}" />
+					</div>
+				</h:panelGroup>
+			</div>
 
 		</pe:layoutPane>
 
 		<!-- Painel inferior (fixo) -->
 		<pe:layoutPane position="south" size="34" closable="false"
-			slidable="false" resizable="false"
-			styleClassContent="bg-black-alpha-20">
+			slidable="false" resizable="false" styleClassContent="bg-gray-300">
 			<!-- Rodapé -->
 			<p:outputLabel value="© #{appInfo.appName} - #{appInfo.currentYear}"
 				styleClass="flex w-full h-full justify-content-center	align-items-center text-700" />

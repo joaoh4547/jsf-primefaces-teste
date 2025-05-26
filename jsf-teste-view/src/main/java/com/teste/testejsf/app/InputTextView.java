@@ -1,4 +1,4 @@
-package com.teste.testejsfview;
+package com.teste.testejsf.app;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
@@ -10,10 +10,6 @@ public class InputTextView {
 	 private String text;
 
 	    public String getText() {
-	    	Object value = """
-	    			dsdsd
-	    			dsdsd
-	    			""";
 	        return text;
 	    }
 

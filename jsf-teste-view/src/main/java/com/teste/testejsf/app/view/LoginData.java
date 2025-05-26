@@ -1,4 +1,4 @@
-package com.teste.testejsfview.app.view;
+package com.teste.testejsf.app.view;
 
 public class LoginData {
 

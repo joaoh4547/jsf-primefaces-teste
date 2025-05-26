@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="jakarta.faces.facelets">
+
+<h:head>
+    <title>Gerenciamento de Usuários</title>
+</h:head>
+<h:body>
+
+<h:form>
+    <p:panel header="Cadastro de Usuário">
+        <p:messages/>
+        <p:inputText value="#{userView.usuario.nome}" placeholder="Nome"/>
+        <p:inputText value="#{userView.usuario.login}" placeholder="Login"/>
+        <p:password value="#{userView.usuario.senha}" placeholder="Senha"/>
+        <p:commandButton value="Salvar" action="#{userView.salvar}" update="@form"/>
+    </p:panel>
+
+    <p:dataTable value="#{userView.usuarios}" var="u">
+        <p:column headerText="ID">#{u.id}</p:column>
+        <p:column headerText="Nome">#{u.nome}</p:column>
+        <p:column headerText="Login">#{u.login}</p:column>
+        <p:column headerText="Ações">
+            <p:commandButton icon="pi pi-trash" action="#{userView.excluir(u)}" update="@form"/>
+        </p:column>
+    </p:dataTable>
+</h:form>
+
+</h:body>
+</html>

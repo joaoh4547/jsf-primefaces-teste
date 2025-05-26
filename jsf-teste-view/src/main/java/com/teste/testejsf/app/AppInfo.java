@@ -1,4 +1,4 @@
-package com.teste.testejsfview;
+package com.teste.testejsf.app;
 
 import java.time.Year;
 

@@ -1,0 +1,12 @@
+<validation-config
+	xmlns="https://jakarta.ee/xml/ns/validation/configuration"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/validation/configuration
+        schema/validation-configuration-3.0.xsd"
+	version="3.0">
+
+	<!-- 1. Configurações principais primeiro -->
+	<message-interpolator>com.teste.testejsf.app.MessageInterpolator</message-interpolator>
+
+	<property name="hibernate.validator.fail_fast">false</property>
+</validation-config>
