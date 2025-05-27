@@ -107,7 +107,7 @@
 							</p:message>
 						</div>
 						<div class="flex flex-column gap-1">
-							<p:outputLabel for="recoverUser" value="Confirmar Senha" />
+							<p:outputLabel for="confirmPass" value="Confirmar Senha" />
 							<p:password value="#{loginView.recoverPassword.confirmPassword}"
 								feedback="true" inline="true" autocomplete="new-password"
 								id="confirmPass" />
@@ -120,7 +120,7 @@
 					<div>
 						<p:commandButton value="Confirmar"
 							action="#{loginView.confirmRecover}"
-							process="@this newPassword verificationCode confirmPass tabConfirm tabView" update="tabConfirm tabView" />
+							process="@this confirmPass newPassword verificationCode" update="passMsg confirmPassMsg codeMsg" />
 					</div>
 				</p:tab>
 			</p:tabView>
